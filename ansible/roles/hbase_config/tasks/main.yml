@@ -19,10 +19,6 @@
 - name: run update-alternatives to set hbase configuration
   command: update-alternatives --set hbase-conf /etc/hbase/conf.mycluster
 
-
-- name: usermod -s /bin/bash hbase
-  shell: usermod -s /bin/bash hbase
-
 - name: ensure HBase is running
   service: name={{ item }} state=started enabled=yes
   with_items:
