@@ -33,3 +33,5 @@ cd vagrant-cdh4.5/vagrant-ansible
 vagrant up
 ```
 
+
+test
