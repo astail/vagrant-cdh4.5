@@ -1,10 +1,5 @@
 ---
 
-
-- name: cat /etc/security/limits.d/90-nproc.conf
-  shell: cat /etc/security/limits.d/90-nproc.conf
-
-
 - name: iptables stop chkconfig iptables off
   service: name=iptables state=stopped enabled=no
 
@@ -13,6 +8,22 @@
 
 - name: install libselinux-python
   yum: name=libselinux-python state=present
+
+
+
+
+- name: cat /etc/security/limits.d/90-nproc.conf
+  shell: cat /etc/security/limits.d/90-nproc.conf
+
+- name: copy 90-nproc.conf
+  copy: src=90-nproc.conf dest=/etc/security/limits.d/90-nproc.conf
+
+- name: cat /etc/security/limits.d/90-nproc.conf
+  shell: cat /etc/security/limits.d/90-nproc.conf
+
+
+
+
 
 - name: check SELinux is enforcing
   command: getenforce
