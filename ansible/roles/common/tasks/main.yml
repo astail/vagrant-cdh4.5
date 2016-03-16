@@ -1,4 +1,17 @@
 ---
+
+- name: ulimit -u
+  shell: ulimit -u
+
+- name: ulimit -n
+  shell: ulimit -n
+
+- name: install iptables
+  yum: name=iptables state=present
+
+- name: install iptables-ipv6
+  yum: name=iptables-ipv6 state=present
+
 - name: iptables stop chkconfig iptables off
   service: name=iptables state=stopped enabled=no
 
@@ -7,6 +20,34 @@
 
 - name: install libselinux-python
   yum: name=libselinux-python state=present
+
+
+- name: install selinux
+  yum: name={{ item }} state=present
+  with_items:
+    - libselinux
+    - selinux-policy
+    - libselinux-python
+    - libselinux-utils
+    - selinux-policy-targeted
+
+
+- name: cat /etc/security/limits.d/90-nproc.conf
+  shell: cat /etc/security/limits.d/90-nproc.conf
+
+- name: copy 90-nproc.conf
+  copy: src=90-nproc.conf dest=/etc/security/limits.d/90-nproc.conf
+
+- name: cat /etc/security/limits.d/90-nproc.conf
+  shell: cat /etc/security/limits.d/90-nproc.conf
+
+
+
+- name: ulimit -u
+  shell: ulimit -u
+
+- name: ulimit -n
+  shell: ulimit -n
 
 - name: check SELinux is enforcing
   command: getenforce
@@ -22,6 +63,8 @@
 - name: install dependency modules
   yum: name={{item}} state=present
   with_items:
+    - sudo
+    - tar
     - gcc
     - kernel-devel
     - perl
@@ -31,3 +74,4 @@
     - ruby
     - git
     - vim
+
