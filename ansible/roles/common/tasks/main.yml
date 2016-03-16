@@ -16,6 +16,8 @@
   yum: name=libselinux-python state=present
 
 
+- name: /etc/selinux/config
+  shell: ls /etc/selinux/config
 
 
 - name: cat /etc/security/limits.d/90-nproc.conf
