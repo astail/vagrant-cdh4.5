@@ -1,5 +1,8 @@
 ---
 
+- name: install iptables
+  yum: name=iptables state=present
+
 - name: iptables stop chkconfig iptables off
   service: name=iptables state=stopped enabled=no
 
