@@ -3,9 +3,6 @@
 - name: ulimit -u
   shell: ulimit -u
 
-- name: ulimit -n
-  shell: ulimit -n
-
 - name: install iptables
   yum: name=iptables state=present
 
@@ -43,6 +40,8 @@
 
 
 
+- name: ulimit -u
+  shell: ulimit -u
 
 
 - name: check SELinux is enforcing
