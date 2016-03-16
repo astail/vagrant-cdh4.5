@@ -3,6 +3,9 @@
 - name: install iptables
   yum: name=iptables state=present
 
+- name: install iptables-ipv6
+  yum: name=iptables-ipv6 state=present
+
 - name: iptables stop chkconfig iptables off
   service: name=iptables state=stopped enabled=no
 
